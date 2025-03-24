@@ -8,13 +8,26 @@
 </head>
 <body>
     <br>
-    @if(Session::has("mensaje"))
-        {{ Session::get("mensaje") }}
-    @endif
-    @extends('layouts.app')
-
+<!-- estas dos instrucciones estan más arriba en el video-->
+@extends('layouts.app')
 @section('content')
-<div class="container">
+
+<div class = "container">
+<!-- si hay un mensaje del controlador-->
+@if(Session::has("mensaje"))
+    <div class = "alert alert-success alert-dismissible" role="alert">
+              {{ Session::get("mensaje") }}
+       
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    
+    </div>
+@endif
+
+
+
+<!-- <div class="container"> -->
     <!-- Enlace para opcion de crear nuevo empleado-->
     <a href="{{ url('empleado/create') }}" class="btn btn-success"> Registrar nuevo empleado </a>
     <br>
@@ -64,7 +77,13 @@
             @endforeach
         </tbody>
     </table>
+    <!-- para mostrar la paginacion-->
+    {!! $empleados->links()!!}
 </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
